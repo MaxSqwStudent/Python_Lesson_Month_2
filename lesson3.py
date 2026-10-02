@@ -55,4 +55,3 @@ class Cat(Animal):
         print("Mew Mew")
 
 gufi = Dog()
-
