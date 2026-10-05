@@ -6,7 +6,8 @@ class Person:
         self.higher_education = higher_education
 
     def introduce(self):
-        print(f"Меня зовут {self.name}, я родился в {self.birth_date}., по профессии я {self.occupation}, {'Высшее образование есть' if self.higher_education == True else 'Высшего образования нету'} ")
+        edu = f'Высшее образование есть' if self.higher_education else 'Высшего образования нету'
+        print(f"Меня зовут {self.name}, я родился в {self.birth_date}., по профессии я {self.occupation}, {edu} ")
 
 class Classmate(Person):
     def __init__(self, name, birth_date, occupation, group_name, friend_name):
@@ -22,7 +23,6 @@ class Friend(Person):
         super().__init__(name, birth_date, occupation)
         self.hobby = hobby
         self.friend_name = friend_name
-
 
     def introduce(self):
         print(f"Привет, меня зовут {self.name}, я друг {self.friend_name}, я родился {self.birth_date}, работаю {self.occupation}")
@@ -48,12 +48,12 @@ classmate2 = Classmate("Азирет", "18.04.1999", "Таксистом", "71-1
 friend1 = Friend("Сыймык", "11.01.2001", "Геодезистом", "Гольф", "Максат")
 friend2 = Friend("Бегимай", "17.07.2006", "Дизайнером", "Рукоделие", "Максат")
 
-best_friend= BestFriend("Нурсултан", "15.05.2005", "Механиком", "Фильмы", "Максат", "Мы дружили с садика")
+best_friend = BestFriend("Нурсултан", "15.05.2005", "Механиком", "Фильмы", "Максат", "Мы дружили с садика")
 
 
 users = [classmate1, classmate2, friend1, friend2, best_friend]
 
 
-for i in users:
-    i.introduce()
+for user in users:
+    user.introduce()
 
