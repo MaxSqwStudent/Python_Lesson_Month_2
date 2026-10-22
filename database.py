@@ -19,6 +19,19 @@ def insert_books(connection, name, author, publication_year, genre, number_of_pa
     """, (name, author, publication_year, genre, number_of_pages, number_of_copies))
     connection.commit()
 
+def get_books_by_author(connection, author):
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT * FROM books WHERE author = ?
+    """, (author,))
+    return cursor.fetchall()
+
+def delete_books_by_author(connection, author):
+    connection.execute("""
+        DELETE FROM books WHERE author = ?
+    """, (author,))
+    connection.commit()
+
 if __name__ == '__main__':
     connection = sqlite3.connect('database.db')
 
@@ -32,6 +45,12 @@ if __name__ == '__main__':
     insert_books(connection, "Гарри поттер 6", "Роалинг чето там", 2010, "Фантастика", 400, 1002400)
     insert_books(connection, "Гарри поттер 7", "Роалинг чето там", 2012, "Фантастика", 550, 4000440)
     insert_books(connection, "Гарри поттер 8", "Роалинг чето там", 2013, "Фантастика", 570, 2000000)
-    insert_books(connection, "Гарри поттер 9", "Роалинг чето там", 2015, "Фантастика", 390, 88000000)
+    insert_books(connection, "Гарри поттер 9", "Роалинг 222", 2015, "Фантастика", 390, 88000000)
+
+    books = get_books_by_author(connection, "Роалинг чето там")
+    for book in books:
+        print(book)
+
+    delete_books_by_author(connection, "Роалинг чето там")
 
     connection.close()
